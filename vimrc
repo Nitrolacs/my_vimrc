@@ -13,7 +13,19 @@ map Q gq
 set relativenumber
 set nu
 
+" Устанавливаем размер табов
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
 inoremap jk <Esc>
+
+" Автоматически загрузит vim-plug, если его нет. Он нужен для работы плагинов.
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin('~/.vim/plugged')
 
